@@ -1,0 +1,27 @@
+﻿name: Research Release & Asset Archiver
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Package Research Weights and Artifacts
+        run: |
+          zip -r wsnsc-benchmark-bundle.zip src/ data/ paper_figures/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: wsnsc-benchmark-bundle.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

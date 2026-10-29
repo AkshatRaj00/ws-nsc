@@ -1,0 +1,21 @@
+﻿name: Welcome External Contributors
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: '👋 Welcome to the **WS-NSC** continual learning repository! We value outside replications and theoretical critiques. Please make sure to state whether your inquiry targets the projection operator, capacity limits, or benchmark datasets.'
+          pr-message: '🎉 Congratulations on your first Pull Request to **WS-NSC**! Our CI test pipeline will verify formatting and matrix dimensions automatically.'
