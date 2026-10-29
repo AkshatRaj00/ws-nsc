@@ -1,0 +1,16 @@
+﻿====================================================================================================
+WS-NSC EMPIRICAL CONTINUAL LEARNING BENCHMARK SUMMARY (SmolLM-135M)
+Sequence: WikiText-2 (Anchor) -> GSM8K (t1) -> IMDb (t2) -> AG News (t3)
+====================================================================================================
+method              gain-wake%  gain-post%   plast-ret     forget    forget%    anchorΔ   rank/d   |dW|kept
+----------------------------------------------------------------------------------------------------
+direct-merge            16.348      16.319       0.998      0.103      5.833      0.057    0.000      1.000
+ws-nsc@0.9              15.286       5.758       0.377     -0.007     -0.390     -0.005    0.362      0.739
+ws-nsc@0.95             15.326       3.738       0.244     -0.007     -0.387     -0.002    0.545      0.616
+====================================================================================================
+Key Conclusions:
+1. Catastrophic Forgetting: WS-NSC reduces relative forgetting from +5.833% to -0.390%.
+2. Representation Drift: Anchor perplexity drift reduced from +0.057 nats to -0.005 nats.
+3. Plasticity Collapse: Hard null-space projection suppresses forward plasticity to 37.7% (@0.9) and 24.4% (@0.95).
+4. Subspace Overhead: At variance rho=0.90, 36.2% of linear rank is occupied; at rho=0.95, 54.5% is occupied.
+====================================================================================================

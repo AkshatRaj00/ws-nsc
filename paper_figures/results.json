@@ -1,0 +1,288 @@
+{
+  "args": {
+    "model": "HuggingFaceTB/SmolLM-135M",
+    "tasks": [
+      "gsm8k",
+      "imdb",
+      "ag_news"
+    ],
+    "anchor": "wikitext",
+    "var_retention": [
+      0.9,
+      0.95
+    ],
+    "rank": 16,
+    "alpha": 32,
+    "lora_dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "lr": 0.0002,
+    "steps": 200,
+    "batch_size": 8,
+    "eval_batch_size": 8,
+    "max_len": 256,
+    "n_train": 2000,
+    "n_eval": 200,
+    "cov_seqs": 256,
+    "cov_device": "cuda",
+    "dtype": "float32",
+    "amp": true,
+    "seed": 0,
+    "out": "ws_nsc_results",
+    "smoke": false
+  },
+  "records": [
+    {
+      "label": "direct-merge",
+      "method": "direct",
+      "var_retention": null,
+      "init": {
+        "wikitext": 3.4227632833354615,
+        "gsm8k": 1.8702716680021718,
+        "imdb": 3.6770528117976817,
+        "ag_news": 3.982012296701111
+      },
+      "stages": [
+        {
+          "task": "gsm8k",
+          "wake": {
+            "wikitext": 3.5175561553806713,
+            "gsm8k": 1.3162117021861963,
+            "imdb": 3.7508433991578918,
+            "ag_news": 4.243379005876476
+          },
+          "post": {
+            "wikitext": 3.51607154715251,
+            "gsm8k": 1.3174420490500143,
+            "imdb": 3.7495460757661316,
+            "ag_news": 4.238846965321318
+          },
+          "merge": {
+            "subspace_rank_frac": 0.0,
+            "delta_norm_kept": 1.0
+          }
+        },
+        {
+          "task": "imdb",
+          "wake": {
+            "wikitext": 3.450805847841912,
+            "gsm8k": 1.4339793774061875,
+            "imdb": 3.5610274001306927,
+            "ag_news": 4.043447616236907
+          },
+          "post": {
+            "wikitext": 3.450744986957678,
+            "gsm8k": 1.430642050275912,
+            "imdb": 3.561317759967267,
+            "ag_news": 4.043306184681117
+          },
+          "merge": {
+            "subspace_rank_frac": 0.0,
+            "delta_norm_kept": 1.0
+          }
+        },
+        {
+          "task": "ag_news",
+          "wake": {
+            "wikitext": 3.480452456803168,
+            "gsm8k": 1.442160380613476,
+            "imdb": 3.646182454611628,
+            "ag_news": 3.4614221263315326
+          },
+          "post": {
+            "wikitext": 3.4796598636365075,
+            "gsm8k": 1.440119947132747,
+            "imdb": 3.6451468953086374,
+            "ag_news": 3.461964942028784
+          },
+          "merge": {
+            "subspace_rank_frac": 0.0,
+            "delta_norm_kept": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "label": "ws-nsc@0.9",
+      "method": "wsnsc",
+      "var_retention": 0.9,
+      "init": {
+        "wikitext": 3.4227632833354615,
+        "gsm8k": 1.8702716680021718,
+        "imdb": 3.6770528117976817,
+        "ag_news": 3.982012296701111
+      },
+      "stages": [
+        {
+          "task": "gsm8k",
+          "wake": {
+            "wikitext": 3.5175561553806713,
+            "gsm8k": 1.3162117021861963,
+            "imdb": 3.7508433991578918,
+            "ag_news": 4.243379005876476
+          },
+          "post": {
+            "wikitext": 3.4222717608347226,
+            "gsm8k": 1.61154078776546,
+            "imdb": 3.67603621532857,
+            "ag_news": 3.979072774790218
+          },
+          "merge": {
+            "subspace_rank_frac": 0.37684978505291006,
+            "delta_norm_kept": 0.7491958672092074
+          }
+        },
+        {
+          "task": "imdb",
+          "wake": {
+            "wikitext": 3.442898123051474,
+            "gsm8k": 1.6846770436698575,
+            "imdb": 3.557064003321759,
+            "ag_news": 4.037906339042294
+          },
+          "post": {
+            "wikitext": 3.4203482343493876,
+            "gsm8k": 1.6056507994013633,
+            "imdb": 3.6480451216607634,
+            "ag_news": 3.9707568307563235
+          },
+          "merge": {
+            "subspace_rank_frac": 0.33740596064814815,
+            "delta_norm_kept": 0.7443786978721618
+          }
+        },
+        {
+          "task": "ag_news",
+          "wake": {
+            "wikitext": 3.4701827523838586,
+            "gsm8k": 1.688242189771648,
+            "imdb": 3.6797821914555486,
+            "ag_news": 3.454715199287817
+          },
+          "post": {
+            "wikitext": 3.4175945082924617,
+            "gsm8k": 1.599701758176805,
+            "imdb": 3.6463953720782034,
+            "ag_news": 3.864450840068385
+          },
+          "merge": {
+            "subspace_rank_frac": 0.3713334986772487,
+            "delta_norm_kept": 0.7221798323449634
+          }
+        }
+      ]
+    },
+    {
+      "label": "ws-nsc@0.95",
+      "method": "wsnsc",
+      "var_retention": 0.95,
+      "init": {
+        "wikitext": 3.4227632833354615,
+        "gsm8k": 1.8702716680021718,
+        "imdb": 3.6770528117976817,
+        "ag_news": 3.982012296701111
+      },
+      "stages": [
+        {
+          "task": "gsm8k",
+          "wake": {
+            "wikitext": 3.5175561553806713,
+            "gsm8k": 1.3162117021861963,
+            "imdb": 3.7508433991578918,
+            "ag_news": 4.243379005876476
+          },
+          "post": {
+            "wikitext": 3.4228307081504745,
+            "gsm8k": 1.6970029585859454,
+            "imdb": 3.6765660375242954,
+            "ag_news": 3.9811052120164963
+          },
+          "merge": {
+            "subspace_rank_frac": 0.5573330026455027,
+            "delta_norm_kept": 0.6265339344739914
+          }
+        },
+        {
+          "task": "imdb",
+          "wake": {
+            "wikitext": 3.443203296177914,
+            "gsm8k": 1.762176869417331,
+            "imdb": 3.5569368204301153,
+            "ag_news": 4.038055234504354
+          },
+          "post": {
+            "wikitext": 3.4217006235919576,
+            "gsm8k": 1.6908402418545558,
+            "imdb": 3.6588499237821672,
+            "ag_news": 3.9756047940913493
+          },
+          "merge": {
+            "subspace_rank_frac": 0.5222129216269842,
+            "delta_norm_kept": 0.6220513525463286
+          }
+        },
+        {
+          "task": "ag_news",
+          "wake": {
+            "wikitext": 3.470913427091327,
+            "gsm8k": 1.7682644660623394,
+            "imdb": 3.6863477990947078,
+            "ag_news": 3.4547925548701697
+          },
+          "post": {
+            "wikitext": 3.4205278896920897,
+            "gsm8k": 1.6845326227127928,
+            "imdb": 3.6573829252646815,
+            "ag_news": 3.9172450444074816
+          },
+          "merge": {
+            "subspace_rank_frac": 0.5549923528439153,
+            "delta_norm_kept": 0.5980648455165681
+          }
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "label": "direct-merge",
+      "plasticity_gain_wake_%": 16.347879380581222,
+      "plasticity_gain_post_%": 16.318894945622628,
+      "plasticity_retention": 0.9982270217265596,
+      "avg_forgetting_nats": 0.10325351671205152,
+      "avg_forgetting_rel_%": 5.832852343453428,
+      "anchor_drift_nats": 0.05689658030104594,
+      "rank_frac": 0.0,
+      "dW_kept": 1.0
+    },
+    {
+      "label": "ws-nsc@0.9",
+      "plasticity_gain_wake_%": 15.285683394068402,
+      "plasticity_gain_post_%": 5.7575121007375385,
+      "plasticity_retention": 0.3766604313531534,
+      "avg_forgetting_nats": -0.006744389585607524,
+      "avg_forgetting_rel_%": -0.38993161651867814,
+      "anchor_drift_nats": -0.00516877504299984,
+      "rank_frac": 0.36186308145943563,
+      "dW_kept": 0.738584799142111
+    },
+    {
+      "label": "ws-nsc@0.95",
+      "plasticity_gain_wake_%": 15.326201048487794,
+      "plasticity_gain_post_%": 3.738057575644707,
+      "plasticity_retention": 0.24389981338614464,
+      "avg_forgetting_nats": -0.006968667195319189,
+      "avg_forgetting_rel_%": -0.38746960019757554,
+      "anchor_drift_nats": -0.0022353936433718857,
+      "rank_frac": 0.5448460923721341,
+      "dW_kept": 0.6155500441789626
+    }
+  ]
+}
